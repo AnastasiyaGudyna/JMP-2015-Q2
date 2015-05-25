@@ -1,0 +1,14 @@
+1) Serial Collector with the following parameters
+   java -Xms6m -Xmx18m -Xmn2m -XX:PermSize=20m -XX:MaxPermSize=30m -XX:+UseSerialGC 
+2) Parallel Collector with the following parameters
+   java -Xms3m -Xmx12m -Xmn1m -XX:PermSize=20m -XX:MaxPermSize=20m -XX:+UseParallelGC
+3) Parallel Old Collector with the following parameters
+   java -Xms9m -Xmx18m -Xmn3m -XX:PermSize=40m -XX:MaxPermSize=40m -XX:+UseParallelOldGC
+4) Concurrent Mark Sweep (CMS) Collector with the following parameters
+   java -Xms6m -Xmx18m -Xmn2m -XX:PermSize=20m -XX:MaxPermSize=30m -XX:+UseConcMarkSweepGC
+5) Concurrent Mark Sweep (CMS) Collector with 2 Parallel CMS Threads with the following parameters
+   java -Xms2m -Xmx18m -Xmn1m -XX:PermSize=24m -XX:MaxPermSize=36m -XX:+UseConcMarkSweepGC -XX:ParallelCMSThreads=2
+6) Parallel Collector with 2 Parallel CMS Threads with the following parameters
+   java -Xms4m -Xmx16m -Xmn3m -XX:PermSize=24m -XX:MaxPermSize=32m -XX:+UseParallelGC -XX:ParallelGCThreads=2
+7) G1 Garbage Collector with the following parameters
+   java -Xms4m -Xmx16m -Xmn2m -XX:PermSize=12m -XX:MaxPermSize=18m -XX:+UseG1GC
