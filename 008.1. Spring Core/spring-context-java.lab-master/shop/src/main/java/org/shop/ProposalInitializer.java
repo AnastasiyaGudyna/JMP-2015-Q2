@@ -1,0 +1,55 @@
+package org.shop;
+
+import org.shop.api.ProductService;
+
+import org.shop.api.ProposalService;
+import org.shop.api.SellerService;
+import org.shop.common.Products;
+import org.shop.data.Product;
+import org.shop.data.Seller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+/**
+ * The Proposal Initializer util class.
+ */
+@Service
+public class ProposalInitializer {
+    
+    /** The product service. */
+    @Autowired
+    @Qualifier("productServiceImpl")
+    private ProductService productService;
+    
+    /** The proposal service. */
+    @Autowired
+    @Qualifier("proposalService")
+    private ProposalService proposalService;
+    
+    /** The seller service. */
+    @Autowired
+    @Qualifier("sellerServiceImpl")
+    private SellerService sellerService;
+
+    /**
+     * Inits the proposals.
+     */
+    public void initProposals() {
+        Seller amazon = sellerService.getSellerById((long) 1);
+        Seller samsung = sellerService.getSellerById((long) 2);
+        
+        Product galaxyTab = productService.getProductsByName(Products.SAMSUNG_GALAXY_TAB).get(0);
+        Product kindleFire = productService.getProductsByName(Products.KINDLE_FIRE).get(0);
+        Product kindleTouch = productService.getProductsByName(Products.KINDLE_TOUCH).get(0);
+        Product galaxyAce = productService.getProductsByName(Products.SAMSUNG_GALAXY_ACE).get(0);
+        
+        //Samsung
+        proposalService.createProposal(samsung.getId(), galaxyAce.getId(), 250.0);
+        proposalService.createProposal(samsung.getId(), galaxyTab.getId(), 500.0);
+        
+        //Amazon
+        proposalService.createProposal(amazon.getId(), kindleFire.getId(), 199.0);
+        proposalService.createProposal(amazon.getId(), kindleTouch.getId(), 99.0);
+    }
+}
